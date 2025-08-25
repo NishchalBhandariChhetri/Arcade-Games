@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: black;
+}
+
+.title {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 36px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#gameCanvas {
+    border: 2px solid white;
+}
+
+.controls {
+    margin-top: 10px;
+}
+
+#playButton, #resetButton {
+    background-color: #333;
+    color: white;
+    border: 2px solid white;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#playButton:hover, #resetButton:hover {
+    background-color: #555;
+}
+
+.copyright {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12px;
+    margin-top: 20px;
+    text-align: center;
+}
