@@ -11,35 +11,20 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="style.css.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <p class="title">Rock Paper Scissors</p>
 
-    <button
-      onclick=" 
-      playGame('rock');
-    "
-      class="move-button"
-    >
+    <button class="js-rock-button move-button">
       <img src="images/rock.png" alt="Rock" class="move-icon" />
     </button>
 
-    <button
-      onclick="  
-      playGame('paper')
-    "
-      class="move-button"
-    >
+    <button class="js-paper-button move-button">
       <img src="images/paper.png" alt="Paper" class="move-icon" />
     </button>
 
-    <button
-      onclick="    
-      playGame('scissors');
-    "
-      class="move-button"
-    >
+    <button class="js-scissors-button move-button">
       <img src="images/scissors.png" alt="Scissors" class="move-icon" />
     </button>
 
@@ -52,6 +37,6 @@
       Reset button
     </button>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
   </body>
 </html>
