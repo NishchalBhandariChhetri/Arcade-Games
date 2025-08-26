@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>U.S. States Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="map-container">
+      <img src="blank_states_img.gif" id="map" alt="Blank US States Map" />
+    </div>
+
+    <div id="score-container">
+      <span id="score">States Guessed: 0/50</span>
+      <span id="highscore">High Score: 0</span>
+    </div>
+
+    <div id="input-container">
+      <input type="text" id="state-input" placeholder="Enter state name" />
+      <button onclick="submitState()">Submit</button>
+    </div>
+
+    <div id="giveup-container">
+      <button onclick="giveUp()">I Give Up</button>
+    </div>
+
+    <div id="retry-container" style="display: none">
+      <button id="retry-button" onclick="resetGame()">Retry</button>
+    </div>
+
+    <script src="script.js"></script>
+    <footer>
+      <p>Copyright © 2025 Nishchal Bhandari Chhetri</p>
+    </footer>
+  </body>
+</html>
