@@ -75,10 +75,6 @@ class ScoreBoard {
         this.update();
     }
 
-    draw() {
-        // No longer drawn on canvas
-    }
-
     increase() {
         this.score += 1;
         this.update();
@@ -116,8 +112,8 @@ class WinBoard {
     }
 }
 
-const paddle1 = new Paddle(20, canvas.height / 2 - 50, 10, 30);
-const paddle2 = new Paddle(canvas.width - 30, canvas.height / 2 - 50, 10, 30);
+const paddle1 = new Paddle(20, canvas.height / 2 - 50, 10, 100);
+const paddle2 = new Paddle(canvas.width - 30, canvas.height / 2 - 50, 10, 100);
 const ball = new Ball();
 const scoreBoard1 = new ScoreBoard('scorePlayer1');
 const scoreBoard2 = new ScoreBoard('scorePlayer2');
@@ -205,13 +201,14 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
+
 document.addEventListener('keydown', (e) => {
     keys[e.key] = true;
 });
-
 document.addEventListener('keyup', (e) => {
     keys[e.key] = false;
 });
+
 
 document.getElementById('playButton').addEventListener('click', () => {
     gameIsOn = !gameIsOn;
@@ -228,20 +225,31 @@ document.getElementById('resetButton').addEventListener('click', () => {
     document.getElementById('playButton').textContent = 'Play';
 });
 
-document.getElementById('p1UpButton').addEventListener('click', () => {
-    if (gameIsOn) paddle1.moveUp();
-});
+function addContinuousControl(buttonId, onPress) {
+    let interval;
+    const btn = document.getElementById(buttonId);
 
-document.getElementById('p1DownButton').addEventListener('click', () => {
-    if (gameIsOn) paddle1.moveDown();
-});
+    const start = () => {
+        if (gameIsOn) {
+            onPress();
+            interval = setInterval(onPress, 50); 
+        }
+    };
 
-document.getElementById('p2UpButton').addEventListener('click', () => {
-    if (gameIsOn) paddle2.moveUp();
-});
+    const stop = () => clearInterval(interval);
 
-document.getElementById('p2DownButton').addEventListener('click', () => {
-    if (gameIsOn) paddle2.moveDown();
-});
+    btn.addEventListener("mousedown", start);
+    btn.addEventListener("touchstart", start);
+
+    btn.addEventListener("mouseup", stop);
+    btn.addEventListener("mouseleave", stop);
+    btn.addEventListener("touchend", stop);
+}
+
+addContinuousControl("p1UpButton", () => paddle1.moveUp());
+addContinuousControl("p1DownButton", () => paddle1.moveDown());
+
+addContinuousControl("p2UpButton", () => paddle2.moveUp());
+addContinuousControl("p2DownButton", () => paddle2.moveDown());
 
 gameLoop();
