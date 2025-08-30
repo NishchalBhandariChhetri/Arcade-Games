@@ -7,7 +7,7 @@ class Paddle {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.speed = 10; // Slower paddle speed
+        this.speed = 10;
     }
 
     draw() {
@@ -35,6 +35,7 @@ class Ball {
         this.radius = 10;
         this.dx = Math.random() < 0.5 ? -3 : 3;
         this.dy = Math.random() < 0.5 ? -2 : 2;
+        this.lastPaddleHit = null;
     }
 
     draw() {
@@ -63,62 +64,65 @@ class Ball {
         this.y = canvas.height / 2;
         this.dx = Math.random() < 0.5 ? -3 : 3;
         this.dy = Math.random() < 0.5 ? -2 : 2;
+        this.lastPaddleHit = null;
     }
 }
 
 class ScoreBoard {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
+    constructor(id) {
         this.score = 0;
+        this.element = document.getElementById(id);
+        this.update();
     }
 
     draw() {
-        ctx.fillStyle = 'white';
-        ctx.font = '24px Times New Roman';
-        ctx.textAlign = 'center';
-        ctx.fillText(`Score: ${this.score}`, this.x, this.y);
+        // No longer drawn on canvas
     }
 
     increase() {
         this.score += 1;
+        this.update();
     }
 
     reset() {
         this.score = 0;
+        this.update();
+    }
+
+    update() {
+        this.element.innerText = `Score: ${this.score}`;
     }
 }
 
 class WinBoard {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
+    constructor(id) {
         this.count = 0;
-    }
-
-    draw() {
-        ctx.fillStyle = 'white';
-        ctx.font = '24px Times New Roman';
-        ctx.textAlign = 'center';
-        ctx.fillText(`WINS: ${this.count}`, this.x, this.y);
+        this.element = document.getElementById(id);
+        this.update();
     }
 
     increase() {
         this.count += 1;
+        this.update();
     }
 
     reset() {
         this.count = 0;
+        this.update();
+    }
+
+    update() {
+        this.element.innerText = `WINS: ${this.count}`;
     }
 }
 
 const paddle1 = new Paddle(20, canvas.height / 2 - 50, 10, 100);
 const paddle2 = new Paddle(canvas.width - 30, canvas.height / 2 - 50, 10, 100);
 const ball = new Ball();
-const scoreBoard1 = new ScoreBoard(canvas.width / 2 - 250, 30);
-const scoreBoard2 = new ScoreBoard(canvas.width / 2 + 250, 30);
-const winBoard1 = new WinBoard(50, canvas.height - 30);
-const winBoard2 = new WinBoard(canvas.width - 50, canvas.height - 30);
+const scoreBoard1 = new ScoreBoard('scorePlayer1');
+const scoreBoard2 = new ScoreBoard('scorePlayer2');
+const winBoard1 = new WinBoard('winPlayer1');
+const winBoard2 = new WinBoard('winPlayer2');
 
 const keys = {};
 let gameIsOn = false;
@@ -150,10 +154,6 @@ function gameLoop() {
     paddle1.draw();
     paddle2.draw();
     ball.draw();
-    scoreBoard1.draw();
-    scoreBoard2.draw();
-    winBoard1.draw();
-    winBoard2.draw();
     drawDashedLine();
 
     if (gameIsOn) {
@@ -164,21 +164,32 @@ function gameLoop() {
             ball.bounceY();
         }
 
-        // Paddle collision
+        // Paddle1 collision
         if (
             ball.x - ball.radius < paddle1.x + paddle1.width &&
+            ball.x + ball.radius > paddle1.x &&
             ball.y > paddle1.y &&
-            ball.y < paddle1.y + paddle1.height
+            ball.y < paddle1.y + paddle1.height &&
+            ball.dx < 0 &&
+            ball.lastPaddleHit !== 'paddle1'
         ) {
             ball.bounceX();
             scoreBoard1.increase();
-        } else if (
+            ball.lastPaddleHit = 'paddle1';
+        }
+
+        // Paddle2 collision
+        if (
             ball.x + ball.radius > paddle2.x &&
+            ball.x - ball.radius < paddle2.x + paddle2.width &&
             ball.y > paddle2.y &&
-            ball.y < paddle2.y + paddle2.height
+            ball.y < paddle2.y + paddle2.height &&
+            ball.dx > 0 &&
+            ball.lastPaddleHit !== 'paddle2'
         ) {
             ball.bounceX();
             scoreBoard2.increase();
+            ball.lastPaddleHit = 'paddle2';
         }
 
         // Out of bounds
@@ -215,6 +226,22 @@ document.getElementById('resetButton').addEventListener('click', () => {
     ball.reset();
     gameIsOn = false;
     document.getElementById('playButton').textContent = 'Play';
+});
+
+document.getElementById('p1UpButton').addEventListener('click', () => {
+    if (gameIsOn) paddle1.moveUp();
+});
+
+document.getElementById('p1DownButton').addEventListener('click', () => {
+    if (gameIsOn) paddle1.moveDown();
+});
+
+document.getElementById('p2UpButton').addEventListener('click', () => {
+    if (gameIsOn) paddle2.moveUp();
+});
+
+document.getElementById('p2DownButton').addEventListener('click', () => {
+    if (gameIsOn) paddle2.moveDown();
 });
 
 gameLoop();

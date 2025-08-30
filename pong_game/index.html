@@ -33,7 +33,7 @@
         }
 
         // Convert filtered JSON back to CSV
-        var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+        var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
         csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
         return csv;
       } catch (e) {
@@ -55,10 +55,28 @@
   <body>
     <div class="container">
       <h1 class="title">PONG</h1>
+      <div class="score-display">
+        <span id="scorePlayer1">Score: 0</span>
+        <span id="scorePlayer2">Score: 0</span>
+      </div>
       <canvas id="gameCanvas" width="1000" height="700"></canvas>
+      <div class="wins-display">
+        <span id="winPlayer1">WINS: 0</span>
+        <span id="winPlayer2">WINS: 0</span>
+      </div>
       <div class="controls">
         <button id="playButton">Play</button>
         <button id="resetButton">Reset</button>
+      </div>
+      <div class="mobile-controls">
+        <div class="player1-controls">
+          <button id="p1UpButton" class="control-btn">↑</button>
+          <button id="p1DownButton" class="control-btn">↓</button>
+        </div>
+        <div class="player2-controls">
+          <button id="p2UpButton" class="control-btn">↑</button>
+          <button id="p2DownButton" class="control-btn">↓</button>
+        </div>
       </div>
       <div class="copyright">
         Copyright &copy; 2025 Nishchal Bhandari Chhetri
