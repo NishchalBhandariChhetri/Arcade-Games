@@ -116,8 +116,8 @@ class WinBoard {
     }
 }
 
-const paddle1 = new Paddle(20, canvas.height / 2 - 50, 10, 100);
-const paddle2 = new Paddle(canvas.width - 30, canvas.height / 2 - 50, 10, 100);
+const paddle1 = new Paddle(20, canvas.height / 2 - 50, 10, 30);
+const paddle2 = new Paddle(canvas.width - 30, canvas.height / 2 - 50, 10, 30);
 const ball = new Ball();
 const scoreBoard1 = new ScoreBoard('scorePlayer1');
 const scoreBoard2 = new ScoreBoard('scorePlayer2');
