@@ -130,6 +130,12 @@ canvas {
     justify-content: center;
 }
 
+@media (min-width: 601px) {
+    #controls {
+        display: none; /* Hide controls on desktop */
+    }
+}
+
 @media (max-width: 600px) {
     canvas {
         width: 100%;
