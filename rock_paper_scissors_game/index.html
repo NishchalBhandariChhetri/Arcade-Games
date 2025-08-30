@@ -10,33 +10,29 @@
       href="https://fonts.googleapis.com/css2?family=Barrio&display=swap"
       rel="stylesheet"
     />
-
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <p class="title">Rock Paper Scissors</p>
-
-    <button class="js-rock-button move-button">
-      <img src="images/rock.png" alt="Rock" class="move-icon" />
-    </button>
-
-    <button class="js-paper-button move-button">
-      <img src="images/paper.png" alt="Paper" class="move-icon" />
-    </button>
-
-    <button class="js-scissors-button move-button">
-      <img src="images/scissors.png" alt="Scissors" class="move-icon" />
-    </button>
-
-    <p class="js-result result"></p>
-    <p class="js-moves moves"></p>
-
-    <p class="js-score score"></p>
-
-    <button onclick="resetScore()" class="reset-score-button">
-      Reset button
-    </button>
-
+    <div class="game-container">
+      <p class="title">Rock Paper Scissors</p>
+      <div class="move-buttons">
+        <button class="js-rock-button move-button">
+          <img src="images/rock.png" alt="Rock" class="move-icon" />
+        </button>
+        <button class="js-paper-button move-button">
+          <img src="images/paper.png" alt="Paper" class="move-icon" />
+        </button>
+        <button class="js-scissors-button move-button">
+          <img src="images/scissors.png" alt="Scissors" class="move-icon" />
+        </button>
+      </div>
+      <p class="js-result result"></p>
+      <p class="js-moves moves"></p>
+      <p class="js-score score"></p>
+      <button onclick="resetScore()" class="reset-score-button">
+        Reset Score
+      </button>
+    </div>
     <script src="script.js" defer></script>
   </body>
 </html>

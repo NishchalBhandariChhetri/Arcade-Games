@@ -1,63 +1,145 @@
 body {
   background-color: lightseagreen;
   color: white;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 800px;
 }
 
 .title {
-  font-size: 50px;
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: bold;
-  margin-left: 150px;
   color: ivory;
   font-family: "Barrio", serif;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.move-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .move-icon {
-  height: 220px;
+  height: clamp(100px, 20vw, 180px);
+  width: auto;
 }
 
 .move-button {
   background-color: transparent;
   border: 3px solid white;
-  width: 240px;
-  height: 240px;
-  border-radius: 120px;
-  margin-right: 30px;
+  width: clamp(120px, 25vw, 200px);
+  height: clamp(120px, 25vw, 200px);
+  border-radius: 50%;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.move-button:hover {
+  transform: scale(1.05);
 }
 
 .moves-icon {
   background-color: transparent;
-  width: 100px;
-  height: 100px;
+  width: clamp(50px, 10vw, 80px);
+  height: auto;
 }
 
 .moves {
-  margin-left: 250px;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  text-align: center;
+  margin: 20px 0;
 }
 
 .result {
-  font-size: 40px;
-  margin-top: 50px;
-  margin-left: 320px;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: bold;
+  text-align: center;
+  margin: 20px 0;
 }
 
 .score {
-  margin: 60px;
-  font-size: 25px;
-  margin-left: 230px;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  text-align: center;
+  margin: 20px 0;
 }
 
-.reset-score-button,
-.auto-play-button {
+.reset-score-button {
   background-color: aliceblue;
   color: brown;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   border: none;
-  font-size: 34px;
-  padding: 18px 26px;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  padding: clamp(10px, 2vw, 15px) clamp(15px, 3vw, 20px);
   cursor: pointer;
-  margin-left: 100px;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.reset-score-button:hover {
+  background-color: #e0e0e0;
+}
+
+@media (max-width: 600px) {
+  .game-container {
+    padding: 10px;
+  }
+
+  .move-buttons {
+    gap: 10px;
+  }
+
+  .move-button {
+    width: clamp(80px, 20vw, 100px);
+    height: clamp(80px, 20vw, 100px);
+  }
+
+  .move-icon {
+    height: clamp(60px, 15vw, 80px);
+  }
+
+  .moves-icon {
+    width: clamp(30px, 8vw, 40px);
+  }
+
+  .title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .result {
+    font-size: clamp(1rem, 4vw, 1.5rem);
+  }
+
+  .moves {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+  }
+
+  .score {
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+  }
+
+  .reset-score-button {
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
+    padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 15px);
+  }
 }
