@@ -26,6 +26,10 @@ const gameOverDiv = document.getElementById('gameover');
 const finalScoreDiv = document.getElementById('final-score');
 const congratsDiv = document.getElementById('congrats');
 const restartButton = document.getElementById('restart');
+const upButton = document.getElementById('up');
+const downButton = document.getElementById('down');
+const leftButton = document.getElementById('left');
+const rightButton = document.getElementById('right');
 
 playButton.addEventListener('click', () => {
     playButton.style.display = 'none';
@@ -37,6 +41,30 @@ restartButton.addEventListener('click', () => {
     playButton.style.display = 'none';
     gameOverDiv.style.display = 'none';
     startGame();
+});
+
+upButton.addEventListener('click', () => {
+    if (direction !== 'down') {
+        nextDirection = 'up';
+    }
+});
+
+downButton.addEventListener('click', () => {
+    if (direction !== 'up') {
+        nextDirection = 'down';
+    }
+});
+
+leftButton.addEventListener('click', () => {
+    if (direction !== 'right') {
+        nextDirection = 'left';
+    }
+});
+
+rightButton.addEventListener('click', () => {
+    if (direction !== 'left') {
+        nextDirection = 'right';
+    }
 });
 
 function startGame() {

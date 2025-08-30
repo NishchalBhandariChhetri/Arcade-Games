@@ -17,18 +17,21 @@ body {
 canvas {
     background-color: #000; /* Black canvas background */
     border: 2px solid #fff; /* Thin white border */
+    max-width: 100%;
+    height: auto;
 }
 
 #scoreboard {
     display: flex;
     justify-content: space-between;
-    width: 500px; /* Increased width for larger canvas */
+    width: 100%;
+    max-width: 500px; /* Increased width for larger canvas */
     margin: 10px 0;
 }
 
 #score-container, #highscore-container {
     color: #FFD700; /* Gold text */
-    font-size: 32px; /* Slightly larger for larger canvas */
+    font-size: clamp(24px, 5vw, 32px); /* Responsive font size */
     font-family: 'Exo 2', sans-serif;
     text-shadow: 1px 1px 2px #006666; /* Dark teal shadow */
 }
@@ -61,14 +64,14 @@ canvas {
 
 #gameover-text {
     color: red;
-    font-size: 70px; /* Slightly larger for larger canvas */
+    font-size: clamp(50px, 10vw, 70px); /* Responsive font size */
     font-family: 'Exo 2', sans-serif;
     text-shadow: 0 0 10px #f00;
 }
 
 #final-score {
     color: #FFD700; /* Gold text */
-    font-size: 35px; /* Slightly larger for larger canvas */
+    font-size: clamp(28px, 6vw, 35px); /* Responsive font size */
     font-family: 'Exo 2', sans-serif;
     margin: 10px 0;
     text-shadow: 1px 1px 2px #006666; /* Dark teal shadow */
@@ -76,7 +79,7 @@ canvas {
 
 #congrats {
     color: yellow;
-    font-size: 32px; /* Slightly larger for larger canvas */
+    font-size: clamp(24px, 5vw, 32px); /* Responsive font size */
     font-family: 'Exo 2', sans-serif;
     margin: 10px 0;
 }
@@ -95,4 +98,62 @@ canvas {
 
 #restart:hover {
     background-color: #e0e0e0;
+}
+
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.control-btn {
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    font-size: 24px;
+    font-family: 'Exo 2', sans-serif;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 10px;
+    cursor: pointer;
+    touch-action: manipulation; /* Prevent default touch behaviors */
+    transition: background-color 0.3s;
+}
+
+.control-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.side-controls {
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 600px) {
+    canvas {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 2; /* Maintain canvas aspect ratio */
+    }
+
+    #scoreboard {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #score-container, #highscore-container {
+        font-size: clamp(20px, 4vw, 28px);
+    }
+
+    #controls {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .control-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
 }
