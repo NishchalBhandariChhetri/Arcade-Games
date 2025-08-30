@@ -101,7 +101,7 @@ canvas {
 }
 
 #controls {
-    display: flex;
+    display: none; /* Hidden by default */
     flex-direction: column;
     align-items: center;
     margin-top: 10px;
@@ -130,13 +130,19 @@ canvas {
     justify-content: center;
 }
 
-@media (min-width: 601px) {
-    #controls {
-        display: none; /* Hide controls on desktop */
-    }
-}
-
 @media (max-width: 600px) {
+    #controls {
+        display: flex; /* Show controls on mobile */
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .control-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+
     canvas {
         width: 100%;
         height: auto;
@@ -150,16 +156,5 @@ canvas {
 
     #score-container, #highscore-container {
         font-size: clamp(20px, 4vw, 28px);
-    }
-
-    #controls {
-        width: 100%;
-        max-width: 300px;
-    }
-
-    .control-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
     }
 }
