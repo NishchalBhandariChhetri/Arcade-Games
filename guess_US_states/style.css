@@ -12,45 +12,41 @@ body {
   background-size: cover;
   color: white;
   font-family: 'Roboto', Arial, sans-serif;
-  touch-action: manipulation; /* Enhances touch responsiveness */
+  touch-action: manipulation; 
 }
 
 #map-container {
-  position: relative;
-  width: 90vw;
-  max-width: 800px;
-  height: 60vw;
-  max-height: 500px;
-  overflow: hidden;
-  padding: 0;
-  transition: transform 0.3s ease;
-}
-
-#map {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-  user-select: none; /* Prevents text selection on touch */
-}
-
-.state-label {
-  position: absolute;
-  font-size: 10px;
-  color: black;
-  transform: translate(-50%, -50%);
-  white-space: nowrap;
-  transition: all 0.3s ease;
-  pointer-events: none; /* Prevents touch interference */
-}
-
-.red {
-  color: red;
-}
+    position: relative;
+    width: 90vw;
+    max-width: 800px;
+    height: auto;              
+    overflow: hidden;
+    padding: 0;
+  }
+  
+  #map {
+    width: 100%;
+    height: auto;         
+    display: block;          
+    position: relative;  
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    user-select: none;
+  }
+  
+  .state-label {
+    position: absolute;
+    font-size: clamp(8px, 1.5vw, 14px);
+    color: black;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 5; 
+  }
+  
+  .red {
+    color: red;
+  }
+  
 
 #score-container {
   margin: 2vw 0;
