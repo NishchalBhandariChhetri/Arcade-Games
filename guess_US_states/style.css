@@ -12,7 +12,7 @@ body {
   background-size: cover;
   color: white;
   font-family: 'Roboto', Arial, sans-serif;
-  touch-action: manipulation;
+  touch-action: manipulation; /* Enhances touch responsiveness */
 }
 
 #map-container {
@@ -35,7 +35,7 @@ body {
   height: 100%;
   object-fit: contain;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-  user-select: none;
+  user-select: none; /* Prevents text selection on touch */
 }
 
 .state-label {
@@ -45,7 +45,7 @@ body {
   transform: translate(-50%, -50%);
   white-space: nowrap;
   transition: all 0.3s ease;
-  pointer-events: none;
+  pointer-events: none; /* Prevents touch interference */
 }
 
 .red {
@@ -74,7 +74,7 @@ body {
   width: 90vw;
   max-width: 900px;
   align-self: center;
-  margin-left: 3vw;             
+  margin-left: 3vw;
 }
 
 #state-input {
@@ -89,16 +89,15 @@ body {
 }
 
 #submit-button,
-#giveup-button { 
+#giveup-button {
   flex: 0 0 auto;
   padding: 12px 24px;
   font-size: max(3vw, 14px);
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  min-height: 44px;
-  white-space: nowrap;   
-
+  min-height: 44px; /* Minimum touch target size */
+  white-space: nowrap;
 }
 
 #submit-button {
@@ -115,7 +114,6 @@ body {
   margin: 2vw 0;
   width: 90vw;
   max-width: 350px;
-  display: none;
 }
 
 #retry-button {
@@ -154,7 +152,7 @@ footer {
   text-shadow: 1px 1px 3px black;
 }
 
-/* Responsive tweaks */
+/* Responsive tweaks for mobile */
 @media (max-width: 600px) {
   #map-container {
     width: 95vw;
@@ -167,6 +165,13 @@ footer {
 
   #state-input {
     font-size: max(4vw, 12px);
+    flex: 1 1 200px; /* Adjust input size for mobile */
+  }
+
+  #input-container {
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 0; /* Reset margin for mobile */
   }
 
   #submit-button,
@@ -174,5 +179,25 @@ footer {
   #retry-button {
     font-size: max(4vw, 12px);
     padding: 3vw 5vw;
+    width: 100%; /* Full width on mobile */
+  }
+}
+
+/* Desktop-specific adjustments */
+@media (min-width: 600px) {
+  #input-container {
+    justify-content: flex-start;
+  }
+
+  #state-input {
+    flex: 2 1 320px;
+  }
+
+  #submit-button {
+    margin-left: 12px;
+  }
+
+  #giveup-button {
+    margin-left: 12px;
   }
 }
