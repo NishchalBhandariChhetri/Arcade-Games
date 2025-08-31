@@ -169,31 +169,47 @@ footer {
   }
 
   #input-container {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
     gap: 10px;
     width: 95vw;
+    max-width: 500px;
     margin: 1rem 0;
   }
 
   #input-submit-container {
-    flex-direction: row;
+    display: flex;
+    flex-wrap: nowrap;
     align-items: center;
-    justify-content: center;
     gap: 10px;
-    width: 100%;
+    width: auto;
     max-width: 320px;
+    flex: 1;
   }
 
   #state-input {
     font-size: max(4vw, 12px);
     width: 100%;
-    max-width: 320px;
+    max-width: 200px;
   }
 
-  #submit-button,
-  #giveup-button,
+  #submit-button {
+    font-size: max(4vw, 12px);
+    padding: 10px 20px;
+    width: auto;
+    min-width: 100px;
+  }
+
+  #giveup-button {
+    font-size: max(4vw, 12px);
+    padding: 10px 20px;
+    width: auto;
+    min-width: 100px;
+    max-width: 150px;
+  }
+
   #retry-button {
     font-size: max(4vw, 12px);
     padding: 10px 20px;
