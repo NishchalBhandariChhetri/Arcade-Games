@@ -71,8 +71,17 @@ function createLabel(stateName, x, y, isRed = false) {
   label.className = "state-label";
   if (isRed) label.classList.add("red");
   label.textContent = stateName;
-  label.style.left = `calc(50% + ${x}px)`;
-  label.style.top = `calc(50% - ${y}px)`;
+
+  // Get the map container's width to scale coordinates
+  const mapContainer = document.getElementById("map-container");
+  const referenceWidth = 800; // Desktop max-width of map-container
+  const currentWidth = mapContainer.offsetWidth;
+  const scale = currentWidth / referenceWidth;
+
+  // Scale x and y coordinates
+  label.style.left = `calc(50% + ${x * scale}px)`;
+  label.style.top = `calc(50% - ${y * scale}px)`;
+
   document.getElementById("map-container").appendChild(label);
   return label;
 }
