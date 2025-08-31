@@ -67,14 +67,22 @@ body {
 #input-container {
   margin: 1rem 0 2rem 0;
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
   gap: 12px;
   width: 90vw;
   max-width: 900px;
   align-self: center;
-  margin-left: 3vw;             
+}
+
+#input-submit-container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 900px;
 }
 
 #state-input {
@@ -98,7 +106,7 @@ body {
   border: none;
   cursor: pointer;
   min-height: 44px;
-  white-space: nowrap;   
+  white-space: nowrap;
 }
 
 #submit-button {
@@ -110,6 +118,11 @@ body {
 #retry-button {
   background-color: rgb(250, 31, 31);
   color: black;
+}
+
+#giveup-button {
+  width: 100%;
+  max-width: 900px;
 }
 
 #retry-container {
@@ -144,7 +157,7 @@ footer {
   text-shadow: 1px 1px 3px black;
 }
 
-/* Responsive tweaks */
+/* Responsive tweaks for mobile */
 @media (max-width: 600px) {
   #map-container {
     width: 95vw;
@@ -155,14 +168,41 @@ footer {
     font-size: max(4vw, 14px);
   }
 
+  #input-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 95vw;
+    margin: 1rem 0;
+  }
+
+  #input-submit-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 320px;
+  }
+
   #state-input {
     font-size: max(4vw, 12px);
+    width: 100%;
+    max-width: 320px;
   }
 
   #submit-button,
   #giveup-button,
   #retry-button {
     font-size: max(4vw, 12px);
-    padding: 3vw 5vw;
+    padding: 10px 20px;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  #retry-container {
+    width: 95vw;
+    max-width: 320px;
   }
 }

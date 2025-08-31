@@ -2,10 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>U.S. States Game</title>
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -20,8 +17,10 @@
     </div>
 
     <div id="input-container">
-      <input type="text" id="state-input" placeholder="Enter state name:" />
-      <button id="submit-button" onclick="submitState()">Submit</button>
+      <div id="input-submit-container">
+        <input type="text" id="state-input" placeholder="Enter state name:" />
+        <button id="submit-button" onclick="submitState()">Submit</button>
+      </div>
       <button id="giveup-button" onclick="giveUp()">I Give Up</button>
     </div>
 
