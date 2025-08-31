@@ -56,6 +56,11 @@ const statesData = [
 const allStates = statesData.map(d => d.state);
 let guessedStates = [];
 let highScore = 0;
+let scale = 1;
+let translateX = 0;
+let translateY = 0;
+let isPinching = false;
+let startDistance = 0;
 
 function toTitleCase(str) {
   if (!str) return "";
@@ -105,25 +110,11 @@ function submitState() {
 }
 
 function showRetryButton() {
-  let retryBtn = document.getElementById("retry");
-  if (!retryBtn) {
-    retryBtn = document.createElement("button");
-    retryBtn.id = "retry";
-    retryBtn.textContent = "Retry";
-    retryBtn.style.display = "block";
-    retryBtn.style.margin = "12px auto";
-    retryBtn.style.padding = "10px 20px";
-    retryBtn.style.fontSize = "16px";
-    retryBtn.style.borderRadius = "8px";
-    retryBtn.style.cursor = "pointer";
+  const retryContainer = document.getElementById("retry-container");
+  if (retryContainer) retryContainer.style.display = "flex";
 
-    const mapContainer = document.getElementById("map-container");
-    mapContainer.insertAdjacentElement("afterend", retryBtn);
-
-    retryBtn.addEventListener("click", resetGame);
-  } else {
-    retryBtn.style.display = "block";
-  }
+  const retryBtn = document.getElementById("retry-button");
+  if (retryBtn) retryBtn.style.display = "block";
 }
 
 function giveUp() {
@@ -133,11 +124,9 @@ function giveUp() {
     if (stateData) createLabel(name, stateData.x, stateData.y, true);
   });
 
+  // Hide all controls; only Retry remains
   const inputBox = document.getElementById("input-container");
   if (inputBox) inputBox.style.display = "none";
-  
-  const giveUpBox = document.getElementById("giveup-container");
-  if (giveUpBox) giveUpBox.style.display = "none";
 
   showRetryButton();
 }
@@ -145,10 +134,6 @@ function giveUp() {
 function endGame() {
   const inputBox = document.getElementById("input-container");
   if (inputBox) inputBox.style.display = "none";
-  
-  const giveUpBox = document.getElementById("giveup-container");
-  if (giveUpBox) giveUpBox.style.display = "none";
-  
   showRetryButton();
 }
 
@@ -160,18 +145,37 @@ function resetGame() {
 
   const inputBox = document.getElementById("input-container");
   if (inputBox) inputBox.style.display = "flex";
-  
-  const giveUpBox = document.getElementById("giveup-container");
-  if (giveUpBox) giveUpBox.style.display = "block";
 
-  const retryBtn = document.getElementById("retry");
-  if (retryBtn) retryBtn.style.display = "none";
+  const retryContainer = document.getElementById("retry-container");
+  if (retryContainer) retryContainer.style.display = "none";
 
   const input = document.getElementById("state-input");
   if (input) {
     input.value = "";
     input.focus();
   }
+
+  scale = 1;
+  translateX = 0;
+  translateY = 0;
+  updateMapTransform();
+}
+
+function getTouchDistance(touches) {
+  const dx = touches[0].clientX - touches[1].clientX;
+  const dy = touches[0].clientY - touches[1].clientY;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+function updateMapTransform() {
+  const map = document.getElementById("map");
+  const labels = document.querySelectorAll(".state-label");
+  map.style.transform = `translate(-50%, -50%) scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+  labels.forEach(label => {
+    label.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    /* smaller than before */
+    label.style.fontSize = `${Math.max(6 * scale, 6)}px`;
+  });
 }
 
 window.onload = () => {
@@ -185,4 +189,40 @@ window.onload = () => {
       if (e.key === "Enter") submitState();
     });
   }
+
+  const mapContainer = document.getElementById("map-container");
+  let startX, startY;
+
+  mapContainer.addEventListener("touchstart", e => {
+    if (e.touches.length === 1) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    } else if (e.touches.length === 2) {
+      isPinching = true;
+      startDistance = getTouchDistance(e.touches);
+    }
+  });
+
+  mapContainer.addEventListener("touchmove", e => {
+    e.preventDefault();
+    if (e.touches.length === 1 && !isPinching) {
+      const dx = e.touches[0].clientX - startX;
+      const dy = e.touches[0].clientY - startY;
+      translateX += dx / scale;
+      translateY += dy / scale;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      updateMapTransform();
+    } else if (e.touches.length === 2) {
+      const newDistance = getTouchDistance(e.touches);
+      const scaleChange = newDistance / startDistance;
+      scale = Math.max(1, Math.min(2, scale * scaleChange));
+      startDistance = newDistance;
+      updateMapTransform();
+    }
+  });
+
+  mapContainer.addEventListener("touchend", () => {
+    isPinching = false;
+  });
 };

@@ -2,6 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes"
+    />
     <title>U.S. States Game</title>
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -16,12 +20,9 @@
     </div>
 
     <div id="input-container">
-      <input type="text" id="state-input" placeholder="Enter state name" />
-      <button onclick="submitState()">Submit</button>
-    </div>
-
-    <div id="giveup-container">
-      <button onclick="giveUp()">I Give Up</button>
+      <input type="text" id="state-input" placeholder="Enter state name:" />
+      <button id="submit-button" onclick="submitState()">Submit</button>
+      <button id="giveup-button" onclick="giveUp()">I Give Up</button>
     </div>
 
     <div id="retry-container" style="display: none">
